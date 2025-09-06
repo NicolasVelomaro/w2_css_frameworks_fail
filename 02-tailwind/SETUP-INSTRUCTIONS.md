@@ -125,7 +125,7 @@ Open `package.json` and find the `"scripts"` section. Add a build script:
 ### 8. Build Your CSS
 Create the output directory and run the build:
 
-```bash
+```bash 
 mkdir dist
 npm run build:css
 ```

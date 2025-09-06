@@ -30,7 +30,7 @@ body {
    The header should have a green background but appears transparent instead.
    Something is wrong with the background property. */
 .main-header {
-  bg-color: #48bb78;
+  background-color: #48bb78; /* first mistake */
   color: white;
   padding: 1rem 2rem;
 }
@@ -45,8 +45,9 @@ body {
    but they're stacking vertically instead. Check the flexbox properties. */
 .main-nav {
   display: flex;
-  justify-items: center;
-  gap: 2rem;
+  justify-content: center;/* second mistake */
+  gap: 4rem ;
+
 }
 
 /* 🔧 DIAGNOSTIC ISSUE #3: Navigation link usability
@@ -56,6 +57,7 @@ body {
   color: white;
   text-decoration: none;
   border-radius: 4px;
+  padding: 0.5rem 1rem; /* third mistake */
   transition: background-color 0.2s;
 }
 
@@ -70,6 +72,7 @@ body {
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+
 }
 
 .harvest-section h2 {
@@ -81,6 +84,7 @@ body {
 .crop-cards {
   gap: 1.5rem;
   margin-top: 1rem;
+  display: flex;  /* fourth mistake */
 }
 
 /* 🔧 DIAGNOSTIC ISSUE #5: Card spacing
@@ -91,7 +95,7 @@ body {
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 15;
+  margin: 15px; /* fifth mistake */
 }
 
 .crop-card h3 {
@@ -108,7 +112,7 @@ body {
    The harvest buttons should be light green but have no background color.
    Check the property name being used for the background. */
 .harvest-btn {
-  bg-color: #68d391;
+  background: #68d391;/* sixth mistake */
   color: #1a202c;
   border: none;
   padding: 0.5rem 1rem;
@@ -122,17 +126,17 @@ body {
    The harvest buttons should turn a darker green when hovered,
    but it's turning red. There's a specificity conflict here. */
 .harvest-btn:hover {
-  background-color: #48bb78;
+  background-color: #48bb78; /*seventh mistake  */
 }
 .harvest-btn:hover {
-  background-color: palevioletred;
+  background-color: #38a169;
 }
 
 /* 🔧 DIAGNOSTIC ISSUE #8: Text color visibility
    Some text appears too light and is hard to read.
    Check if there are any color values that might be too close to the background. */
 .harvest-section p {
-  color: #f7fafc;
+  color: #5c5c5c; /* eighth mistake */
   font-size: 0.9rem;
   text-align: center;
   margin-bottom: 1rem;
@@ -142,7 +146,7 @@ body {
    The volunteer form should have a visible border around it to group the fields,
    but the border is completely invisible. */
 .volunteer-form fieldset {
-  border: 1px solid transparent;
+  border: 1px solid #d2d6dc; /* ninth mistake */
   border-radius: 6px;
   padding: 1.5rem;
   margin-bottom: 1rem;
@@ -160,6 +164,10 @@ body {
   cursor: pointer;
   font-weight: 600;
   margin-top: 1rem;
+  width: 100%; /* tenth mistake */
+}
+.submit-btn:hover {
+  background-color: #38a169;
 }
 
 /* ========== QUALITATIVE SECTION (30 minutes) ========== */
@@ -208,10 +216,16 @@ Reference: See assets/volunteer-section-mockup.png for the target design
 
 .volunteer-form-container {
   /* TODO: Layout form and info side by side */
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas: "form form info";
 }
 
 .volunteer-form {
   /* TODO: Improve form styling and spacing */
+  grid-area: form;
+  margin-right: 2rem;
+  min-width: 215px;
 }
 
 .volunteer-form legend {
@@ -251,9 +265,10 @@ Reference: See assets/volunteer-section-mockup.png for the target design
 
 /* TODO: Replace this div with a proper button element for accessibility */
 .fake-button {
-  background-color: #48bb78;
-  color: white;
+  background-color: none;
+  color: rgb(82, 82, 82);
   padding: 0.75rem 1.5rem;
+  border: none;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
@@ -262,11 +277,18 @@ Reference: See assets/volunteer-section-mockup.png for the target design
 }
 
 .fake-button:hover {
-  background-color: #38a169;
+  background-color: #5f5f5f;
+  color: white;
 }
 
 .volunteer-info {
   /* TODO: Style this info section to complement the form */
+  grid-area: info;
+  background-color: #f7f7f7bd;
+  padding: 1rem;
+  border :none;
+  border-radius: 6px;
+
 }
 
 .volunteer-info h3 {
@@ -297,7 +319,7 @@ Reference: See assets/volunteer-section-mockup.png for the target design
 }
 
 /* Media queries for responsive design */
-@media (max-width: 768px) {
+@media (max-width: 575px) {
   .main-nav {
     flex-direction: column;
     gap: 0.5rem;
@@ -309,5 +331,14 @@ Reference: See assets/volunteer-section-mockup.png for the target design
 
   .volunteer-form-container {
     flex-direction: column;
+  }
+  .volunteer-form {
+    margin-right: 0;
+    margin-bottom: 2rem;
+  }
+  .volunteer-info {
+    margin-top: 2rem;
+    margin-right: 0.5rem;
+    width: 50vh;
   }
 }
